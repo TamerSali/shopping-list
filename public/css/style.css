@@ -62,3 +62,22 @@ i {
 	transition: border .3s;
 	outline: none;
 }
+
+/**
+ * Shopping Item.
+ */
+.shopping-item{
+	border-bottom: 1px solid lightgray;
+	width: 100%;
+}
+
+/**
+ * Shopping List.
+ */
+.shopping-list .empty-list{
+	border-bottom: 1px solid lightgray;
+	text-align: center;
+	color: #999;
+	font-style: italic;
+	padding: 15px;
+}
