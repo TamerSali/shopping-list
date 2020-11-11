@@ -42,6 +42,14 @@ export default function ShoppingList() {
 		});
 		updateItems(lastStateOfItems);
 	}
+	const handleUpdate = selectedItem => {
+		const lastStateOfItems = stateItems.map(item =>{
+			return selectedItem.id === item.id
+				? selectedItem
+				: item;
+		})
+		updateItems(lastStateOfItems)
+	}
 	const handleDelete = id => {
 		const lastStateOfItems = stateItems.filter(item => item.id !== id);
 		updateItems(lastStateOfItems)
@@ -82,6 +90,7 @@ export default function ShoppingList() {
 					key={item.id}
 					item={item}
 					onToggle={handleToggleComplete}
+					onUpdate={handleUpdate}
 					onDelete={handleDelete}
 
 				/>
