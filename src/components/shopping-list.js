@@ -1,18 +1,30 @@
 /**
  * External dependencies.
  */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 /**
  * Internal dependencies.
  */
 import ShoppingForm from './shopping-form'
 import ShoppingItem from './shopping-item'
+import { setStateInLocalStorage, getStateFromLocalStorage } from '../useLocalStorage'
+
+const localStorageKey = "Shopping/Items"
 
 export default function ShoppingList() {
 	const [stateItems, setItems] = useState([]);
 
+	useEffect(() => {
+		const localStorageItems = getStateFromLocalStorage(localStorageKey);
+		setItems(localStorageItems ? localStorageItems : []);
+	}, [] )
+
+	const updateItems = items => {
+		setItems(items);
+		setStateInLocalStorage(localStorageKey, items);
+	}
 	const handleItemAdd = item => {
-		setItems([...stateItems,item]);
+		updateItems([...stateItems,item]);
 	}
 	const handleToggleComplete = id => {
 		const lastStateOfItems = stateItems.map(item => {
@@ -20,11 +32,11 @@ export default function ShoppingList() {
 				? {...item, complete: ! item.complete}
 				: item;
 		});
-		setItems(lastStateOfItems);
+		updateItems(lastStateOfItems)
 	}
 	const handleDelete = id => {
 		const lastStateOfItems = stateItems.filter(item => item.id !== id);
-		setItems(lastStateOfItems);
+		updateItems(lastStateOfItems)
 	}
 
 	return(
