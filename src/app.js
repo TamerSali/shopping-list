@@ -5,7 +5,7 @@ import React, { Fragment } from 'react';
 /**
  * Internal dependencies.
  */
-import ShoppingList from './components/shopping-list'
+import ShoppingList from './components/shopping-list.js'
 
 function App() {
 
@@ -15,6 +15,7 @@ function App() {
 			<div className="app">
 				<ShoppingList/>
 			</div>
+			<footer>Double-click to edit an item</footer>
 		</Fragment>
 	)
 
