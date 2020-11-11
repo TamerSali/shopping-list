@@ -39,6 +39,9 @@ i {
 	vertical-align: middle;
 	color: lightgrey;
 }
+i:not(.delete-item):hover{
+	color:green !important;
+}
 
 /**
  * Shopping Form.
@@ -67,8 +70,19 @@ i {
  * Shopping Item.
  */
 .shopping-item{
+	position: relative;
 	border-bottom: 1px solid lightgray;
 	width: 100%;
+}
+.shopping-item:hover{
+	 background: #fffdec;
+}
+.shopping-item i.delete-item{
+	position: absolute;
+	right: 0;
+	top: 20%;
+	transform: translate(0,-20%);
+	color: #da6060;
 }
 
 /**
