@@ -13,6 +13,8 @@ const localStorageKey = "Shopping/Items"
 
 export default function ShoppingList() {
 	const [stateItems, setItems] = useState([]);
+	const [stateFilter, setFilter] = useState("all");;
+
 
 	useEffect(() => {
 		const localStorageItems = getStateFromLocalStorage(localStorageKey);
@@ -44,6 +46,24 @@ export default function ShoppingList() {
 		const lastStateOfItems = stateItems.filter(item => item.id !== id);
 		updateItems(lastStateOfItems)
 	}
+	const handleClearAll = e => {
+		const lastStateOfItems = stateItems.filter(item => ! item.complete);
+		updateItems(lastStateOfItems);
+	}
+
+	const allItems = stateItems;
+	const activeItems = stateItems.filter(item => ! item.complete);
+	const completedItems = stateItems.filter(item => item.complete);
+
+	const filteredItems = {
+		"all": allItems,
+		"active": activeItems,
+		"completed": completedItems,
+	};
+
+	const filterItemsBy = Object.keys(filteredItems);
+
+	const shopItems = filteredItems[stateFilter] || [];
 
 	return(
 		<div className="shopping-list">
@@ -53,11 +73,11 @@ export default function ShoppingList() {
 				onSelectAll={handleToggleAll}
 			/>
 
-			{!stateItems.length && (
+			{!shopItems.length && (
 				<div className="empty-list">No Items Here</div>
 			)}
 
-			{stateItems.map(item => (
+			{shopItems.map(item => (
 				<ShoppingItem
 					key={item.id}
 					item={item}
@@ -66,6 +86,31 @@ export default function ShoppingList() {
 
 				/>
 			))}
+
+			<div className="list-filters">
+				<div className="item-has-left">
+					{stateItems.filter(item => ! item.complete).length} item left
+				</div>
+
+				{filterItemsBy.map(condition => (
+					<button
+						key={condition}
+						className={stateFilter === condition ? "is-active" : ""}
+						onClick={ () => setFilter(condition)}
+					>
+						{condition}
+					</button>
+				))}
+
+				<div className="clear-completed">
+					<button
+						onClick={handleClearAll}
+						disabled={stateItems.some(item => item.complete) ? false : true}
+					>
+						Clear completed
+					</button>
+				</div>
+			</div>
 
 		</div>
 	)
