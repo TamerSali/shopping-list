@@ -29,11 +29,27 @@ export default function ShoppingForm (props) {
 		setValue("");
 	}
 
+	const handleToggleAll = e => {
+		const toggleSelectAll = props.checkItems.some(item => {
+			return ! item.complete ? true : false;
+		});
+		props.onSelectAll(toggleSelectAll);
+	}
+
+	const isAllSelected = () => {
+		if(!props.checkItems){
+			return false;
+		}
+		return props.checkItems.filter(item => ! item.complete).length === 0;
+	}
+
 	return(
 		<div className="shopping-form">
 			<form onSubmit={handleUserSubmit}>
 				<i
 					className="fal fa-2x fa-check-circle"
+					style={{color: isAllSelected() && "green"}}
+					onClick={handleToggleAll}
 				/>
 				<input
 					type="text"
