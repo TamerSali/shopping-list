@@ -95,3 +95,40 @@ i:not(.delete-item):hover{
 	font-style: italic;
 	padding: 15px;
 }
+.shopping-list .list-filters{
+	display: flex;
+	margin-top: 20px;
+}
+.shopping-list .list-filters .item-has-left{
+	color:#999;
+	margin-right: auto;
+}
+.shopping-list .list-filters button {
+	margin: 0 0 0 10px;
+	outline: none;
+	border: solid 1px #ddd;
+	border-radius: 3px;
+	padding: 3px 5px;
+	background: transparent;
+	cursor: pointer;
+	color: #777;
+	transition: color .2s, border-color .2s;
+}
+.shopping-list .list-filters button:disabled{
+	cursor:not-allowed;
+	opacity: .4;
+}
+.shopping-list .list-filters  button.is-active{
+	font-weight: bold;
+	color: #000;
+	border-color: #d2adad;
+}
+.shopping-list .list-filters  button:hover:not(:disabled){
+	font-weight: bold;
+	color: #000;
+	border-color: #d2adad;
+}
+.shopping-list .list-filters .clear-completed{
+	margin-left: auto;
+	color:#777;
+}
