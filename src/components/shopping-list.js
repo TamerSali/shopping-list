@@ -34,6 +34,12 @@ export default function ShoppingList() {
 		});
 		updateItems(lastStateOfItems)
 	}
+	const handleToggleAll = status => {
+		const lastStateOfItems = stateItems.map(item => {
+			return {...item, complete: status}
+		});
+		updateItems(lastStateOfItems);
+	}
 	const handleDelete = id => {
 		const lastStateOfItems = stateItems.filter(item => item.id !== id);
 		updateItems(lastStateOfItems)
@@ -41,7 +47,11 @@ export default function ShoppingList() {
 
 	return(
 		<div className="shopping-list">
-			<ShoppingForm onSubmit={handleItemAdd}/>
+			<ShoppingForm
+				checkItems={stateItems}
+				onSubmit={handleItemAdd}
+				onSelectAll={handleToggleAll}
+			/>
 
 			{!stateItems.length && (
 				<div className="empty-list">No Items Here</div>
@@ -53,6 +63,7 @@ export default function ShoppingList() {
 					item={item}
 					onToggle={handleToggleComplete}
 					onDelete={handleDelete}
+
 				/>
 			))}
 
