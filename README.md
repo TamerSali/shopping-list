@@ -1,6 +1,4 @@
-#React Shopping List App
-
-<h3>Your app should include the following features:</h3>
+<h1>Th app includes the following features:</h1>
 <ul>
 	<li> Add an item </li>
 	<li> Remove item </li>
